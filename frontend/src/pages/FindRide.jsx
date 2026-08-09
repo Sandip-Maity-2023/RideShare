@@ -1,161 +1,183 @@
-import React, { useState, useRef } from 'react';
-import {
-  useJsApiLoader,
-  GoogleMap,
-  Autocomplete,
-  DirectionsRenderer,
-  Marker,
-} from '@react-google-maps/api';
-import { MapPin, Navigation, Search, Calendar, Users } from 'lucide-react';
+import React, { useState } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
+import { GeoapifyContext, GeoapifyGeocoderAutocomplete } from '@geoapify/react-geocoder-autocomplete';
+import '@geoapify/geocoder-autocomplete/styles/minimal.css';
+import { MapPin, Navigation, Search } from 'lucide-react';
+import L from 'leaflet';
 
-const LIBRARIES = ['places'];
-const DEFAULT_CENTER = { lat: 22.5726, lng: 88.3639 }; // Default center (Kolkata)
+// Fix Leaflet marker icon issue in React
+import markerIconPng from 'leaflet/dist/images/marker-icon.png';
+import markerShadowPng from 'leaflet/dist/images/marker-shadow.png';
 
-const FindRide = () => {
-  const { isLoaded, loadError } = useJsApiLoader({
-    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY || '',
-    libraries: LIBRARIES,
-  });
+const customIcon = L.icon({
+  iconUrl: markerIconPng,
+  shadowUrl: markerShadowPng,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+});
 
-  const [origin, setOrigin] = useState('');
-  const [destination, setDestination] = useState('');
-  const [directionsResponse, setDirectionsResponse] = useState(null);
+const GEOAPIFY_KEY = import.meta.env.VITE_GEOAPIFY_API_KEY || 'https://api.geoapify.com/v1/geocode/autocomplete?text=Mosco&apiKey=f1ba5c5d75ab47909a12bab33f982ce4';
+
+const FindRideFree = () => {
+  const [origin, setOrigin] = useState(null);
+  const [destination, setDestination] = useState(null);
+  const [routePolyline, setRoutePolyline] = useState([]);
   const [distance, setDistance] = useState('');
   const [duration, setDuration] = useState('');
 
-  const originRef = useRef(null);
-  const destinationRef = useRef(null);
-
-  // Calculate route between Origin & Destination
-  const calculateRoute = async () => {
-    if (!originRef.current?.value || !destinationRef.current?.value) return;
-
-    // eslint-disable-next-line no-undef
-    const directionsService = new google.maps.DirectionsService();
-    const results = await directionsService.route({
-      origin: originRef.current.value,
-      destination: destinationRef.current.value,
-      // eslint-disable-next-line no-undef
-      travelMode: google.maps.TravelMode.DRIVING,
-    });
-
-    setDirectionsResponse(results);
-    setDistance(results.routes[0].legs[0].distance.text);
-    setDuration(results.routes[0].legs[0].duration.text);
-  };
-
-  const handlePlaceSelect = () => {
-    if (originRef.current?.value && destinationRef.current?.value) {
-      calculateRoute();
+  // Handle Autocomplete Selection
+  const handleOriginSelect = (value) => {
+    if (value?.geometry) {
+      const [lng, lat] = value.geometry.coordinates;
+      setOrigin({ lat, lng, name: value.properties.formatted });
     }
   };
 
-  if (loadError) {
-    return <div className="p-8 text-red-500">Error loading Google Maps. Verify your API key.</div>;
-  }
+  const handleDestinationSelect = (value) => {
+    if (value?.geometry) {
+      const [lng, lat] = value.geometry.coordinates;
+      setDestination({ lat, lng, name: value.properties.formatted });
+    }
+  };
 
-  if (!isLoaded) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
-        Loading Maps & Route Planner...
-      </div>
-    );
-  }
+  // Calculate Route using Geoapify Routing API
+  const calculateRoute = async (e) => {
+    e.preventDefault();
+
+    if (!origin || !destination) {
+      alert('Please select both pickup and drop-off locations.');
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `https://api.geoapify.com/v1/routing?waypoints=${origin.lat},${origin.lng}|${destination.lat},${destination.lng}&mode=drive&apiKey=${GEOAPIFY_KEY}`
+      );
+      const data = await response.json();
+
+      if (data.features && data.features.length > 0) {
+        const feature = data.features[0];
+
+        // Extract coordinates array for polyline drawing
+        const coordinates = feature.geometry.coordinates[0].map(([lng, lat]) => [lat, lng]);
+        setRoutePolyline(coordinates);
+
+        // Calculate distance and duration
+        const distanceKm = (feature.properties.distance / 1000).toFixed(2);
+        const durationMin = Math.round(feature.properties.time / 60);
+
+        setDistance(`${distanceKm} km`);
+        setDuration(`${durationMin} mins`);
+      }
+    } catch (error) {
+      console.error('Error fetching route:', error);
+      alert('Could not calculate route.');
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white flex flex-col lg:flex-row">
-      {/* Left Input Control Sidebar */}
-      <div className="w-full lg:w-1/3 p-6 bg-slate-950 border-r border-slate-800 flex flex-col justify-between z-10">
-        <div>
-          <h2 className="text-2xl font-bold mb-6 text-white flex items-center gap-2">
-            <Navigation className="text-blue-500" /> Find a Commute
-          </h2>
+    <GeoapifyContext apiKey={GEOAPIFY_KEY}>
+      <div className="min-h-screen bg-slate-900 text-white flex flex-col lg:flex-row">
+        
+        {/* Left Sidebar Form */}
+        <div className="w-full lg:w-1/3 p-6 bg-slate-950 border-r border-slate-800 flex flex-col justify-between">
+          <div>
+            <h2 className="text-2xl font-bold mb-6 text-white flex items-center gap-2">
+              <Navigation className="text-blue-500" /> Free Ride Finder
+            </h2>
 
-          <form onSubmit={(e) => { e.preventDefault(); calculateRoute(); }} className="space-y-4">
-            {/* Origin Autocomplete Input */}
-            <div className="relative">
-              <label className="text-xs text-slate-400 font-medium mb-1 block">PICKUP LOCATION</label>
-              <div className="relative">
-                <MapPin className="absolute left-3 top-3 text-emerald-400 w-5 h-5 z-10" />
-                <Autocomplete onPlaceChanged={handlePlaceSelect}>
-                  <input
-                    type="text"
-                    placeholder="Enter origin city or area..."
-                    ref={originRef}
-                    onChange={(e) => setOrigin(e.target.value)}
-                    className="w-full bg-slate-900 border border-slate-700 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500"
+            <form onSubmit={calculateRoute} className="space-y-4">
+              {/* Pickup Location */}
+              <div>
+                <label className="text-xs text-slate-400 font-medium mb-1 block">
+                  PICKUP LOCATION
+                </label>
+                <div className="bg-slate-900 border border-slate-700 rounded-xl p-2 text-blue-400">
+                  <GeoapifyGeocoderAutocomplete
+                    placeholder="Search pickup point..."
+                    placeSelect={handleOriginSelect}
                   />
-                </Autocomplete>
-              </div>
-            </div>
-
-            {/* Destination Autocomplete Input */}
-            <div className="relative">
-              <label className="text-xs text-slate-400 font-medium mb-1 block">DROP-OFF LOCATION</label>
-              <div className="relative">
-                <MapPin className="absolute left-3 top-3 text-rose-500 w-5 h-5 z-10" />
-                <Autocomplete onPlaceChanged={handlePlaceSelect}>
-                  <input
-                    type="text"
-                    placeholder="Enter destination..."
-                    ref={destinationRef}
-                    onChange={(e) => setDestination(e.target.value)}
-                    className="w-full bg-slate-900 border border-slate-700 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500"
-                  />
-                </Autocomplete>
-              </div>
-            </div>
-
-            {/* Travel Details Summary Card */}
-            {distance && duration && (
-              <div className="p-4 bg-slate-900 border border-slate-800 rounded-xl flex justify-around text-center my-4">
-                <div>
-                  <p className="text-xs text-slate-400">Total Distance</p>
-                  <p className="text-lg font-bold text-blue-400">{distance}</p>
-                </div>
-                <div className="border-r border-slate-800" />
-                <div>
-                  <p className="text-xs text-slate-400">Est. Duration</p>
-                  <p className="text-lg font-bold text-emerald-400">{duration}</p>
                 </div>
               </div>
-            )}
 
-            <button
-              type="submit"
-              className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-xl flex items-center justify-center gap-2 transition"
-            >
-              <Search className="w-4 h-4" /> Search Available Rides
-            </button>
-          </form>
+              {/* Drop-off Location */}
+              <div>
+                <label className="text-xs text-slate-400 font-medium mb-1 block">
+                  DROP-OFF LOCATION
+                </label>
+                <div className="bg-slate-900 border border-slate-700 rounded-xl p-2 text-blue-400">
+                  <GeoapifyGeocoderAutocomplete
+                    placeholder="Search destination..."
+                    placeSelect={handleDestinationSelect}
+                  />
+                </div>
+              </div>
+
+              {/* Distance and Duration Summary */}
+              {distance && duration && (
+                <div className="p-4 bg-slate-900 border border-slate-800 rounded-xl flex justify-around text-center my-4">
+                  <div>
+                    <p className="text-xs text-slate-400">Distance</p>
+                    <p className="text-lg font-bold text-blue-400">{distance}</p>
+                  </div>
+                  <div className="border-r border-slate-800" />
+                  <div>
+                    <p className="text-xs text-slate-400">Est. Duration</p>
+                    <p className="text-lg font-bold text-emerald-400">{duration}</p>
+                  </div>
+                </div>
+              )}
+
+              <button
+                type="submit"
+                className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-xl flex items-center justify-center gap-2 transition cursor-pointer"
+              >
+                <Search className="w-4 h-4" /> Calculate Route
+              </button>
+            </form>
+          </div>
+
+          <p className="text-xs text-slate-500 text-center mt-6">
+            Powered by OpenStreetMap & Geoapify (No Billing Required)
+          </p>
         </div>
 
-        <p className="text-xs text-slate-500 text-center mt-6">
-          Real-time route computation powered by Google Maps API
-        </p>
-      </div>
+        {/* Right Map Viewport */}
+        <div className="w-full lg:w-2/3 h-[500px] lg:h-screen relative">
+          <MapContainer
+            center={[22.5726, 88.3639]}
+            zoom={12}
+            style={{ width: '100%', height: '100%' }}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
 
-      {/* Right Map Viewport */}
-      <div className="w-full lg:w-2/3 h-[500px] lg:h-screen relative">
-        <GoogleMap
-          center={DEFAULT_CENTER}
-          zoom={12}
-          mapContainerStyle={{ width: '100%', height: '100%' }}
-          options={{
-            zoomControl: true,
-            streetViewControl: false,
-            mapTypeControl: false,
-            fullscreenControl: false,
-          }}
-        >
-          {/* Render Route Polyline once computed */}
-          {directionsResponse && (
-            <DirectionsRenderer directions={directionsResponse} />
-          )}
-        </GoogleMap>
+            {/* Pickup Marker */}
+            {origin && (
+              <Marker position={[origin.lat, origin.lng]} icon={customIcon}>
+                <Popup>Pickup: {origin.name}</Popup>
+              </Marker>
+            )}
+
+            {/* Destination Marker */}
+            {destination && (
+              <Marker position={[destination.lat, destination.lng]} icon={customIcon}>
+                <Popup>Destination: {destination.name}</Popup>
+              </Marker>
+            )}
+
+            {/* Drawn Driving Route */}
+            {routePolyline.length > 0 && (
+              <Polyline positions={routePolyline} color="#3b82f6" weight={5} />
+            )}
+          </MapContainer>
+        </div>
+
       </div>
-    </div>
+    </GeoapifyContext>
   );
 };
 
-export default FindRide;
+export default FindRideFree;

@@ -1,0 +1,39 @@
+1. System Architecture & Tech Stack
+
+[ Client Tier (React.js + Tailwind CSS) ]
+                    │
+      REST API / Socket.io Connections
+                    │
+   [ Server Tier (Node.js + Express.js) ]
+         │                   │
+   [ Database ]      [ External APIs ]
+   (MongoDB)         ├── Google Maps / Leaflet + OSRM (Routing/Tracking)
+                     └── Razorpay (Payments/Wallet Sandbox)
+
+src/
+├── components/
+│   ├── Navbar.jsx              # Navigation header with profile avatar
+│   ├── RouteMap.jsx            # Interactive Leaflet/Google Map for preview & tracking
+│   ├── VehicleCard.jsx         # Card component for vehicle details
+│   ├── AdminMetricsHeader.jsx  # Reusable KPI stats bar (Total Employees, Vehicles, Rides)
+│   └── ChatWindow.jsx          # Embedded slide-out chat & voice trigger
+├── pages/
+│   ├── SplashScreen.jsx        # Landing splash view
+│   ├── Login.jsx               # Login form view
+│   ├── SignUp.jsx              # Registration form with profile photo upload
+│   ├── FindRide.jsx            # Search interface with route swap and recurring filters
+│   ├── OfferRide.jsx           # Publishing view linked to user's registered vehicles
+│   ├── RouteConfirmation.jsx   # Map preview before confirming search or publishing
+│   ├── LiveTracking.jsx        # Map with real-time driver coordinates & ETA
+│   ├── MyTrips.jsx             # Active, completed, and pending trip lists
+│   ├── Wallet.jsx              # Balance display and top-up modal
+│   ├── AdminDashboard/
+│   │   ├── EmployeesTab.jsx    # Employee table with access toggle
+│   │   ├── VehiclesTab.jsx     # Vehicle approval matrix
+│   │   └── SettingsTab.jsx     # Fuel/Cost configuration controls
+│   └── ReportsAnalytics.jsx    # Vehicle efficiency, fuel consumption, and cost charts
+└── App.jsx
+
+frontend:
+npm install react-router-dom lucide-react recharts
+npm install react-leaflet leaflet

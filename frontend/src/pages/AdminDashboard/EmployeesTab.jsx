@@ -7,11 +7,11 @@ const EmployeesTab = () => {
   const [employees, setEmployees] = useState([
     {
       id: '1',
-      name: 'Raj Patel',
-      email: 'raj.patel@company.com',
+      name: 'Sandip Maity',
+      email: 'sandip.maity@company.com',
       department: 'Engineering',
       manager: 'A. Rao',
-      location: 'Ahmedabad',
+      location: 'Kolkata',
       platformAccess: true,
     },
     {
@@ -42,12 +42,12 @@ const EmployeesTab = () => {
     );
   };
 
-  const filteredEmployees = employees.filter(
-    (emp) =>
-      emp.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      emp.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      emp.department.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Improved multi-field search filter
+const filteredEmployees = employees.filter((emp) =>
+  [emp.name, emp.email, emp.department, emp.location].some((field) =>
+    field.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+);
 
   return (
     <div className="space-y-6">

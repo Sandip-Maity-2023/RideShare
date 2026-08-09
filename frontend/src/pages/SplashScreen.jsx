@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Car, Sparkles, ArrowRight } from 'lucide-react';
-import image from '../assets/image.png';
+import car from '../assets/image2.png';
 
 const SplashScreen = () => {
   const navigate = useNavigate();
@@ -81,7 +81,7 @@ const SplashScreen = () => {
         {/* Carpooling Illustration Image */}
         <div className="relative w-64 h-64 sm:w-72 sm:h-72 mb-2 flex items-center justify-center">
           <img
-            src={image}
+            src={car}
             alt="Carpooling Illustration"
             className="w-full h-full object-contain drop-shadow-xl animate-fade-in"
           />

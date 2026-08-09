@@ -14,9 +14,12 @@ const SettingsTab = () => {
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setConfig((prev) => ({ ...prev, [name]: value }));
-  };
+  const { name, value, type } = e.target;
+  setConfig((prev) => ({
+    ...prev,
+    [name]: type === 'number' ? parseFloat(value) || 0 : value,
+  }));
+};
 
   const handleSave = (e) => {
     e.preventDefault();

@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+
 const rideSchema = new mongoose.Schema({
   driverId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, //
   organizationId: { type: mongoose.Schema.Types.ObjectId, ref: 'Organization', required: true }, //

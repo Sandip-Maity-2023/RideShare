@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+
 const vehicleSchema = new mongoose.Schema({
   ownerId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, //
   registrationNumber: { type: String, required: true, unique: true }, //
