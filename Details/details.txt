@@ -34,6 +34,82 @@ src/
 │   └── ReportsAnalytics.jsx    # Vehicle efficiency, fuel consumption, and cost charts
 └── App.jsx
 
+
+erDiagram
+    ORGANIZATION {
+        ObjectId _id PK
+        string name
+    }
+
+    USER {
+        ObjectId _id PK
+        string name
+        string email UK
+        string phone
+        string password
+        string role
+        ObjectId organizationId FK
+        string department
+        string manager
+        string officeLocation
+        string profilePhoto
+        boolean platformAccess
+        number walletBalance
+        array savedPlaces
+        date createdAt
+        date updatedAt
+    }
+
+    VEHICLE {
+        ObjectId _id PK
+        ObjectId ownerId FK
+        string registrationNumber UK
+        string model
+        number seatingCapacity
+        string status
+        date createdAt
+        date updatedAt
+    }
+
+    RIDE {
+        ObjectId _id PK
+        ObjectId driverId FK
+        ObjectId organizationId FK
+        ObjectId vehicleId FK
+        object startLocation
+        object destinationLocation
+        date departureTime
+        number availableSeats
+        number farePerSeat
+        boolean isRecurring
+        array recurringDays
+        string status
+        date createdAt
+        date updatedAt
+    }
+
+    BOOKING {
+        ObjectId _id PK
+        ObjectId ride FK
+        ObjectId passenger FK
+        number seatsBooked
+        string pickupLocation
+        string dropoffLocation
+        number totalCost
+        string status
+        string paymentStatus
+        date createdAt
+        date updatedAt
+    }
+
+    ORGANIZATION ||--o{ USER : "employs"
+    ORGANIZATION ||--o{ RIDE : "manages"
+    USER ||--o{ VEHICLE : "owns"
+    USER ||--o{ RIDE : "drives"
+    USER ||--o{ BOOKING : "books"
+    VEHICLE ||--o{ RIDE : "used_in"
+    RIDE ||--o{ BOOKING : "contains"
+
 frontend:
 npm install react-router-dom lucide-react recharts
 npm install react-leaflet leaflet
