@@ -1,0 +1,142 @@
+.live-tracking-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 60px); /* Fills screen cleanly below main top layout navbar */
+  width: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #f8fafc;
+}
+
+/* MAIN BODY */
+.tracking-main-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* SIDE PANEL */
+.tracking-side-panel {
+  width: 280px;
+  background-color: #ffffff;
+  border-right: 1px solid #cbd5e1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.track-back-btn {
+  background: none;
+  border: none;
+  color: #3b82f6;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+  margin-bottom: 24px;
+}
+
+.track-back-btn:hover {
+  text-decoration: underline;
+}
+
+.location-inputs-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.location-field label {
+  display: block;
+  font-size: 13px;
+  color: #3b82f6;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.input-with-icon {
+  display: flex;
+  align-items: center;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 8px 12px;
+  background-color: #f8fafc;
+}
+
+.input-with-icon .icon {
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+.input-with-icon input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-size: 13px;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.divider {
+  border: none;
+  border-top: 1px dashed #cbd5e1;
+  margin: 24px 0;
+}
+
+/* TRIP META INFO */
+.trip-meta-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.meta-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #334155;
+}
+
+.bold-plate {
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #0f172a;
+}
+
+/* MAP WRAPPER */
+.map-display-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.leaflet-map-frame {
+  flex: 1;
+  width: 100%;
+  z-index: 1;
+}
+
+/* BOTTOM ETA BAR */
+.eta-bottom-bar {
+  height: 54px;
+  background-color: #ffffff;
+  border-top: 1px solid #cbd5e1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.eta-bottom-bar h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #1e293b;
+  font-weight: 600;
+}

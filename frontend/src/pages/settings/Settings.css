@@ -1,0 +1,94 @@
+/* Page Layout */
+.settings-page {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f8fafc;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, sans-serif;
+}
+
+/* Sidebar Styling */
+.settings-sidebar {
+  width: 220px;
+  background-color: #ffffff;
+  border-right: 1px solid #e2e8f0;
+  padding: 24px 16px;
+}
+
+.sidebar-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin: 0;
+}
+
+/* Main Content Styling */
+.settings-main-content {
+  flex: 1;
+  padding: 24px 32px;
+}
+
+/* Header Navigation */
+.settings-header {
+  margin-bottom: 24px;
+}
+
+.back-link {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1e293b;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: #2563eb;
+}
+
+/* Options List Container */
+.settings-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 800px;
+}
+
+/* Individual Light Blue Item Card */
+.settings-item-card {
+  display: flex;
+  align-items: center;
+  background-color: #e0f2fe; /* Light Blue UI Theme */
+  border: 1px solid #bae6fd;
+  border-radius: 8px;
+  padding: 14px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.settings-item-card:hover {
+  background-color: #bae6fd;
+  transform: translateX(4px);
+}
+
+/* Icons and Text Labels */
+.item-icon-wrapper {
+  font-size: 1.25rem;
+  width: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+}
+
+.item-label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #1e293b;
+  flex: 1;
+}
+
+.item-chevron {
+  font-size: 1.1rem;
+  color: #64748b;
+  font-weight: 600;
+}

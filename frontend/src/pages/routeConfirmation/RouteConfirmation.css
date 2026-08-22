@@ -1,0 +1,233 @@
+.route-confirmation-page {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 65px);
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   LEFT SIDEBAR
+========================================= */
+
+.route-sidebar {
+  width: 280px;
+  min-width: 280px;
+  padding: 24px 20px;
+  background-color: #ffffff;
+  border-right: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+  z-index: 10;
+}
+
+.back-link {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  align-self: flex-start;
+  padding: 0;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.location-input-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #333333;
+  padding-bottom: 4px;
+  gap: 8px;
+}
+
+.search-icon {
+  font-size: 16px;
+}
+
+.input-wrapper input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+  color: #2563eb;
+  background: transparent;
+}
+
+.input-wrapper input::placeholder {
+  color: #3b82f6;
+  opacity: 0.8;
+}
+
+.search-loading {
+  font-size: 12px;
+  color: #666;
+  font-weight: bold;
+}
+
+/* =========================================
+   SUGGESTIONS DROPDOWN
+========================================= */
+
+.suggestions-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  max-height: 220px;
+  overflow-y: auto;
+  list-style: none;
+  margin-top: 4px;
+  padding: 0;
+}
+
+.suggestions-dropdown li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  border-bottom: 1px solid #f3f4f6;
+  color: #333;
+}
+
+.suggestions-dropdown li:hover {
+  background-color: #f3f4f6;
+}
+
+.suggestion-icon {
+  font-size: 14px;
+}
+
+.suggestion-text {
+  line-height: 1.3;
+}
+
+/* =========================================
+   TIME PICKER
+========================================= */
+
+.time-picker-wrapper select {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background-color: #f9fafb;
+  font-size: 13px;
+  color: #111827;
+  cursor: pointer;
+}
+
+/* =========================================
+   TRIP SUMMARY CARD (SIDEBAR)
+========================================= */
+
+.trip-summary-card {
+  margin-top: 8px;
+  padding: 12px 14px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.summary-label {
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.summary-value {
+  font-size: 15px;
+  color: #1e293b;
+  font-weight: 700;
+}
+
+/* =========================================
+   MAP SECTION & CONFIRM BUTTON
+========================================= */
+
+.route-map-section {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.route-info-badge {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  padding: 8px 18px;
+  border-radius: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  font-weight: 600;
+  font-size: 14px;
+  color: #1e293b;
+  z-index: 999;
+}
+
+.confirm-action-bar {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+}
+
+.confirm-route-btn {
+  width: 100%;
+  padding: 10px 0;
+  background-color: #cbd5e1;
+  color: #1e293b;
+  border: 1px solid #94a3b8;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.confirm-route-btn:hover {
+  background-color: #94a3b8;
+  color: #ffffff;
+}

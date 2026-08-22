@@ -1,0 +1,264 @@
+/* Login.css */
+
+/* Reset & Main Wrapper */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.login-wrapper {
+  min-height: 100vh;
+  background-color: #f4f7fb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.login-page-title {
+  color: #0077b6;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+/* Main Login Card Container */
+.login-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 800px;
+  border-radius: 12px;
+  border: 1px solid #0077b6;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+/* Card Header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.brand-logo {
+  color: #0077b6;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.user-profile-welcome {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #0077b6;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.profile-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0077b6;
+}
+
+/* Card Body Layout */
+.card-body {
+  display: flex;
+  min-height: 400px;
+}
+
+/* Left Sidebar */
+.left-sidebar {
+  width: 25%;
+  border-right: 1px solid #e0e0e0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 30px 20px;
+}
+
+.left-sidebar h2 {
+  color: #0077b6;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Form Section (Right Side) */
+.form-section {
+  width: 75%;
+  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sub-heading {
+  color: #0077b6;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+/* Role Toggle Container */
+.role-toggle-container {
+  display: flex;
+  background-color: #f0f4f8;
+  border-radius: 8px;
+  padding: 4px;
+  width: 100%;
+  max-width: 420px;
+  margin-bottom: 24px;
+}
+
+.toggle-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  background: transparent;
+  color: #0077b6;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.toggle-btn.active {
+  background-color: #0077b6;
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Styles */
+.login-form {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 14px;
+  color: #0077b6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 14px 12px 44px;
+  border: 1px solid #0077b6;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #333;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-group input:focus {
+  border-color: #005b8a;
+  box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.15);
+}
+
+.login-submit-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #0077b6;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.login-submit-btn:hover {
+  background-color: #005b8a;
+}
+
+/* Divider Line */
+.divider-container {
+  display: flex;
+  align-items: center;
+  margin: 24px 0;
+  width: 100%;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background-color: #0077b6;
+}
+
+.divider-text {
+  padding: 0 12px;
+  color: #0077b6;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Signup Redirect Prompt */
+.signup-prompt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.signup-prompt span {
+  color: #0077b6;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.signup-btn {
+  background-color: #e2e8f0;
+  color: #334155;
+  text-decoration: none;
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.signup-btn:hover {
+  background-color: #cbd5e1;
+}
+
+/* Responsive View */
+@media (max-width: 640px) {
+  .card-body {
+    flex-direction: column;
+  }
+
+  .left-sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 16px;
+  }
+
+  .form-section {
+    width: 100%;
+    padding: 20px 16px;
+  }
+}

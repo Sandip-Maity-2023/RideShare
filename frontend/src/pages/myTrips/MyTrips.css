@@ -1,0 +1,486 @@
+/* Container Layout */
+.my-trips-page {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f4f7fb;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  color: #2c3e50;
+}
+
+/* Sidebar */
+.trips-sidebar {
+  width: 240px;
+  background-color: #ffffff;
+  border-right: 1px solid #e1e8ed;
+  padding: 24px 20px;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.02);
+}
+
+.sidebar-heading {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1a252f;
+  margin: 0;
+}
+
+/* Main Content Area */
+.trips-main-content {
+  flex: 1;
+  padding: 30px 40px;
+  max-width: 1100px;
+}
+
+/* Header Navigation & Tabs */
+.trip-detail-header {
+  margin-bottom: 24px;
+}
+
+.header-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.back-link {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0066cc;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: #004080;
+  text-decoration: underline;
+}
+
+.trip-tabs {
+  display: flex;
+  background-color: #e9ecef;
+  padding: 4px;
+  border-radius: 8px;
+  gap: 4px;
+}
+
+.tab-btn {
+  border: none;
+  background: transparent;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #6c757d;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  color: #212529;
+}
+
+.tab-btn.active {
+  background-color: #ffffff;
+  color: #0066cc;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Trips List & Loading/Empty States */
+.loading-text,
+.no-trips-box {
+  text-align: center;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  color: #6c757d;
+  border: 1px dashed #cbd5e1;
+}
+
+.trips-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Trip Detail Card (Light Blue Theme) */
+.trip-detail-card.light-blue-card {
+  background-color: #eef6ff;
+  border: 1px solid #d0e3ff;
+  border-radius: 14px;
+  padding: 20px 24px;
+  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.trip-detail-card.light-blue-card:hover {
+  box-shadow: 0 6px 16px rgba(0, 102, 204, 0.1);
+}
+
+/* Card Header Row */
+.card-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.driver-profile-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.driver-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #dbeafe;
+  color: #0066cc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.driver-name-route {
+  display: flex;
+  flex-direction: column;
+}
+
+.driver-name {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1e293b;
+  text-transform: capitalize;
+}
+
+.route-subtitle {
+  font-size: 0.85rem;
+  color: #64748b;
+  text-transform: capitalize;
+}
+
+.route-heading-large {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1e293b;
+  text-transform: capitalize;
+}
+
+.card-top-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.trip-schedule {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #64748b;
+  background-color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+}
+
+.menu-options-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #64748b;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.menu-options-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Middle Info Row (Active Card) */
+.card-middle-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  border-top: 1px solid #dce9f9;
+  border-bottom: 1px solid #dce9f9;
+}
+
+.info-block {
+  flex: 1;
+}
+
+.block-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.block-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vehicle-icon {
+  font-size: 1.2rem;
+}
+
+.vehicle-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.vehicle-text strong {
+  font-size: 0.95rem;
+  color: #0f172a;
+}
+
+.vehicle-text small {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.loc-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.loc-pin-red {
+  font-size: 1rem;
+}
+
+.loc-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.loc-text strong {
+  font-size: 0.95rem;
+  color: #0f172a;
+  text-transform: capitalize;
+}
+
+/* Bottom Row (Active Card) */
+.card-bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.action-buttons-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.action-btn {
+  border: none;
+  background-color: #ffffff;
+  color: #334155;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid #cbd5e1;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.action-btn:hover {
+  background-color: #f8fafc;
+  border-color: #94a3b8;
+}
+
+.finish-trigger-btn {
+  background-color: #10b981;
+  color: #ffffff;
+  border: none;
+}
+
+.finish-trigger-btn:hover {
+  background-color: #059669;
+}
+
+/* Fare & Payment Controls */
+.fare-display {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fare-amount {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.pay-now-btn {
+  background-color: #0066cc;
+  color: #ffffff;
+  border: none;
+  padding: 8px 18px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.pay-now-btn:hover {
+  background-color: #004080;
+}
+
+.paid-status-badge {
+  display: inline-flex;
+  align-items: center;
+  background-color: #d1fae5;
+  color: #047857;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid #a7f3d0;
+}
+
+.paid-status-badge.inline-badge {
+  padding: 4px 10px;
+  font-size: 0.8rem;
+}
+
+/* Finished Trip Layout Overrides */
+.finish-card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-top: 1px solid #dce9f9;
+  border-bottom: 1px solid #dce9f9;
+}
+
+.finish-locations-group {
+  display: flex;
+  gap: 32px;
+}
+
+.finish-fare-large {
+  display: flex;
+  align-items: baseline;
+  color: #0066cc;
+  font-weight: 800;
+}
+
+.currency-symbol {
+  font-size: 1.2rem;
+  margin-right: 2px;
+}
+
+.fare-number {
+  font-size: 1.8rem;
+}
+
+.finish-card-action-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/* Disabled Payment Button State */
+.pay-now-btn.disabled-pay-btn,
+.pay-now-btn:disabled {
+  background-color: #10b981 !important;
+  color: #ffffff !important;
+  cursor: not-allowed !important;
+  opacity: 0.85;
+  box-shadow: none !important;
+  pointer-events: none;
+  border: 1px solid #059669;
+}
+
+.pay-now-btn.disabled-pay-btn:hover {
+  background-color: #10b981 !important;
+}
+.back-to-active-btn {
+  background: none;
+  border: none;
+  color: #0066cc;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+
+.back-to-active-btn:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .my-trips-page {
+    flex-direction: column;
+  }
+
+  .trips-sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e1e8ed;
+    padding: 16px;
+  }
+
+  .trips-main-content {
+    padding: 20px 16px;
+  }
+
+  .card-middle-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .finish-card-body {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .finish-locations-group {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .card-bottom-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .action-buttons-group {
+    width: 100%;
+  }
+
+  .action-btn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .fare-display {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+}

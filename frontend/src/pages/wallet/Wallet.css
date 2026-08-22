@@ -1,0 +1,339 @@
+.wallet-page {
+  display: flex;
+  min-height: calc(100vh - 65px);
+  background-color: #ffffff;
+  width: 100%;
+}
+
+/* Sidebar styling matching MyTrips */
+.wallet-sidebar {
+  width: 240px;
+  min-width: 240px;
+  padding: 32px 24px;
+  border-right: 1.5px solid #e2e8f0;
+  background-color: transparent;
+}
+
+.sidebar-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0284c7;
+  margin: 0;
+}
+
+.wallet-main-content {
+  flex: 1;
+  padding: 32px 48px;
+  max-width: 900px;
+}
+
+.wallet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.back-link {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #0284c7;
+  cursor: pointer;
+  user-select: none;
+}
+
+.balance-header-display {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #0284c7;
+}
+
+.balance-amount {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-left: 6px;
+}
+
+/* Light Blue UI Theme Card Container */
+.wallet-card {
+  background-color: #eff6ff;
+  border-radius: 16px;
+  padding: 36px 40px;
+  border: 1px solid #dbeafe;
+  display: flex;
+  flex-direction: column;
+}
+
+.recharge-form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Amount Row */
+.amount-input-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.amount-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #0284c7;
+  width: 80px;
+}
+
+.amount-input-wrapper {
+  display: flex;
+  align-items: center;
+  border-bottom: 1.5px solid #0284c7;
+  padding: 2px 8px;
+  width: 180px;
+}
+
+.currency-prefix {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0284c7;
+  margin-right: 6px;
+}
+
+.amount-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1e293b;
+  width: 100%;
+}
+
+/* Options Group */
+.payment-options-group {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.payment-method-row {
+  display: flex;
+  align-items: center;
+}
+
+.payment-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.payment-option input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #0284c7;
+  cursor: pointer;
+}
+
+.option-label {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #0284c7;
+}
+
+/* Dynamic Card Form */
+.card-form-container {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  border: 1px solid #cbd5e1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 480px;
+  margin-left: 28px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.input-group input {
+  padding: 8px 12px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  outline: none;
+  color: #1e293b;
+  transition: border-color 0.2s ease;
+}
+
+.input-group input:focus {
+  border-color: #0284c7;
+}
+
+.card-row-split {
+  display: flex;
+  gap: 16px;
+}
+
+.card-row-split .input-group {
+  flex: 1;
+}
+
+/* UPI Layout */
+.upi-recharge-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.upi-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.upi-input-wrapper {
+  display: flex;
+  align-items: center;
+  border-bottom: 1.5px solid #0284c7;
+  padding: 2px 4px;
+  gap: 8px;
+}
+
+.upi-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  width: 140px;
+  font-size: 0.95rem;
+  color: #1e293b;
+}
+
+.upi-domain {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0284c7;
+}
+
+.verify-btn {
+  background-color: #0284c7;
+  color: #ffffff;
+  border: none;
+  padding: 4px 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.verify-btn:hover {
+  background-color: #0369a1;
+}
+
+.verify-btn.verified {
+  background-color: #16a34a;
+}
+
+.upi-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.scan-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0284c7;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.radio-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid #cbd5e1;
+  background-color: #ffffff;
+  display: inline-block;
+}
+
+.qr-box {
+  width: 76px;
+  height: 76px;
+  background-color: #ffffff;
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-code-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Submit Action Button */
+.add-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.add-money-btn {
+  width: 100%;
+  max-width: 480px;
+  background-color: #cbd5e1;
+  color: #1e293b;
+  border: none;
+  padding: 12px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add-money-btn:hover {
+  background-color: #0284c7;
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .wallet-page {
+    flex-direction: column;
+  }
+  .wallet-sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1.5px solid #e2e8f0;
+  }
+  .upi-recharge-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .card-form-container {
+    margin-left: 0;
+    width: 100%;
+  }
+}

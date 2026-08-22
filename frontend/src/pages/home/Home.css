@@ -1,0 +1,387 @@
+/* CONTAINER & LAYOUT */
+.home-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 40px;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #1e293b;
+}
+
+.home-content {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.sidebar-brand-section {
+  width: 200px;
+  padding-top: 10px;
+}
+
+.sidebar-title {
+  color: #2563eb;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* RIDE BOOKING CARD */
+.ride-booking-card {
+  flex: 1;
+  background-color: #f8fafc;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  border: 1px solid #e2e8f0;
+}
+
+/* TOGGLE TABS */
+.mode-toggle-bar {
+  display: flex;
+  background-color: #e2e8f0;
+  border-radius: 10px;
+  padding: 4px;
+  margin-bottom: 28px;
+}
+
+.mode-btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  font-weight: 600;
+  color: #64748b;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mode-btn.active {
+  background-color: #ffffff;
+  color: #1e293b;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* BOOKING FORM */
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.locations-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+}
+
+.location-fields-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.field-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.input-with-icon {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #cbd5e1;
+  padding-bottom: 8px;
+  transition: border-color 0.2s ease;
+}
+
+.input-with-icon:focus-within {
+  border-bottom-color: #2563eb;
+}
+
+.search-icon {
+  font-size: 18px;
+  color: #64748b;
+  margin-right: 12px;
+}
+
+.input-with-icon input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-size: 16px;
+  color: #1e293b;
+}
+
+.search-loading {
+  color: #64748b;
+  font-size: 14px;
+}
+
+/* SWAP BUTTON */
+.swap-locations-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid #cbd5e1;
+  background-color: #ffffff;
+  color: #64748b;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.swap-locations-btn:hover {
+  background-color: #f1f5f9;
+  color: #2563eb;
+}
+
+/* SUGGESTIONS DROPDOWN */
+.home-suggestions-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 8px 0;
+  margin: 4px 0 0 0;
+  z-index: 100;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.home-suggestions-dropdown li {
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.home-suggestions-dropdown li:hover {
+  background-color: #f1f5f9;
+}
+
+/* DATETIME AND SEATS ROW */
+.datetime-seats-row {
+  display: flex;
+  gap: 20px;
+}
+
+.datetime-picker-box,
+.seat-picker-box {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #cbd5e1;
+  padding-bottom: 8px;
+}
+
+.picker-icon {
+  font-size: 18px;
+  margin-right: 12px;
+  color: #64748b;
+}
+
+.datetime-input,
+.seat-select {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-size: 16px;
+  color: #1e293b;
+  cursor: pointer;
+}
+
+/* FARE OFFER ROW (OFFER RIDE SPECIFIC) */
+.fare-offer-row {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #cbd5e1;
+  padding-bottom: 8px;
+}
+
+.fare-input-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.currency-symbol {
+  font-size: 18px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.fare-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 16px;
+  color: #1e293b;
+  width: 80px;
+  font-weight: 500;
+}
+
+.fare-label-text {
+  font-size: 15px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* RECURRING RIDE SECTION */
+.recurring-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.recurring-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.recurring-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.recurring-separator {
+  color: #94a3b8;
+}
+
+.days-chip-list {
+  display: flex;
+  gap: 6px;
+}
+
+.day-chip {
+  border: 1px solid #cbd5e1;
+  background-color: #ffffff;
+  color: #64748b;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.day-chip.selected {
+  background-color: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+}
+
+/* TOGGLE SWITCH */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #cbd5e1;
+  transition: 0.3s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2563eb;
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+/* SUBMIT BUTTON */
+.find-ride-btn {
+  width: 100%;
+  background-color: #cbd5e1;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all 0.2s ease;
+}
+
+.find-ride-btn:hover {
+  background-color: #94a3b8;
+  color: #ffffff;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .home-content {
+    flex-direction: column;
+  }
+
+  .sidebar-brand-section {
+    width: 100%;
+  }
+
+  .datetime-seats-row {
+    flex-direction: column;
+  }
+
+  .recurring-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}

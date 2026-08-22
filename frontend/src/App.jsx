@@ -1,125 +1,82 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-
-// Layout & Core Pages
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import SplashScreen from './pages/SplashScreen';
-import Login from './pages/Login';
-import SignUp from './pages/SignUp';
-import FindRide from './pages/FindRide';
-import OfferRide from './pages/OfferRide';
-import RouteConfirmation from './pages/RouteConfirmation';
-import LiveTracking from './pages/LiveTracking';
-import MyTrips from './pages/MyTrips';
-import Wallet from './pages/Wallet';
-import ReportsAnalytics from './pages/ReportAnalytics';
+import Splash from './pages/splash/Splash';
+import Login from './pages/login/Login';
+import Signup from './pages/signup/Signup';
+import Home from './pages/home/Home';
+import RouteConfirmation from './pages/routeConfirmation/RouteConfirmation';
+import AvailableRides from './pages/availableRides/AvailableRides';
+import MyTrips from './pages/myTrips/MyTrips';
+import LiveTracking from './pages/liveTracking/LiveTracking';
+import Wallet from './pages/wallet/Wallet';
+import MyVehicle from './pages/myVehicle/MyVehicle';
+import AdminDashboard from './pages/adminDashboard/AdminDashboard';
+import './App.css';
+import PaymentMethod from "./pages/paymentMethod/PaymentMethod";
+import RideHistory from "./pages/rideHistory/RideHistory";
+import Settings from "./pages/settings/Settings";
+import Report from "./pages/report/Report";
 
-// Admin Tabs Container Page
-import EmployeesTab from './pages/AdminDashboard/EmployeesTab';
-import VehiclesTab from './pages/AdminDashboard/VehiclesTab';
-import SettingsTab from './pages/AdminDashboard/SettingsTab';
+// Show navbar everywhere EXCEPT login, signup, and admin dashboard
+const ConditionalNavbar = ({ token }) => {
+  const location = useLocation();
+  
+  // Exclude auth screens and admin dashboard from rendering the main application navbar
+  const hideOnPaths = ['/login', '/signup', '/admin-dashboard'];
+  
+  if (hideOnPaths.includes(location.pathname)) {
+    return null;
+  }
 
-const AdminContainer = () => {
-  const [activeTab, setActiveTab] = useState('employees');
-
-  return (
-    <div className="max-w-6xl mx-auto px-4 py-6 space-y-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-900">Company Admin Dashboard</h1>
-        {/* Tab Switcher Navigation Bar */}
-        <div className="flex space-x-1 bg-gray-100 p-1 rounded-xl text-xs font-semibold">
-          <button
-            onClick={() => setActiveTab('employees')}
-            className={`px-4 py-2 rounded-lg transition ${
-              activeTab === 'employees' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-600'
-            }`}
-          >
-            Employees
-          </button>
-          <button
-            onClick={() => setActiveTab('vehicles')}
-            className={`px-4 py-2 rounded-lg transition ${
-              activeTab === 'vehicles' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-600'
-            }`}
-          >
-            Vehicles
-          </button>
-          <button
-            onClick={() => setActiveTab('settings')}
-            className={`px-4 py-2 rounded-lg transition ${
-              activeTab === 'settings' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-600'
-            }`}
-          >
-            Settings
-          </button>
-        </div>
-      </div>
-
-      {activeTab === 'employees' && <EmployeesTab />}
-      {activeTab === 'vehicles' && <VehiclesTab />}
-      {activeTab === 'settings' && <SettingsTab />}
-    </div>
-  );
+  return <Navbar />;
 };
 
 function App() {
-  const [user, setUser] = useState({
-    _id: 'usr01',
-    name: 'Dero Addict',
-    email: 'admin@company.com',
-    role: 'CompanyAdmin',
-  });
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
-  const registeredVehiclesSample = [
-    {
-      _id: 'veh01',
-      registrationNumber: 'GJ01AB1234',
-      model: 'Swift Dzire',
-      seatingCapacity: 4,
-      status: 'Active',
-    },
-    {
-      _id: 'veh02',
-      registrationNumber: 'GJ01CD5678',
-      model: 'Honda City',
-      seatingCapacity: 4,
-      status: 'Active',
-    },
-  ];
+  useEffect(() => {
+    const handleAuthChange = () => {
+      setToken(localStorage.getItem('token'));
+    };
 
-  const handleLogout = () => {
-    setUser(null);
-  };
+    window.addEventListener('storage', handleAuthChange);
+    window.addEventListener('auth-change', handleAuthChange);
+
+    return () => {
+      window.removeEventListener('storage', handleAuthChange);
+      window.removeEventListener('auth-change', handleAuthChange);
+    };
+  }, []);
 
   return (
     <Router>
-      <div className="min-h-screen bg-gray-50 text-gray-900 font-sans">
-        {user && <Navbar user={user} onLogout={handleLogout} />}
-
-        <Routes>
-          <Route path="/" element={<SplashScreen />} />
-          <Route path="/login" element={<Login onLoginSuccess={setUser} />} />
-          <Route path="/signup" element={<SignUp />} />
-
-          {/* Employee Module Routes */}
-          <Route path="/find-ride" element={<FindRide />} />
-          <Route
-            path="/offer-ride"
-            element={<OfferRide registeredVehicles={registeredVehiclesSample} />}
-          />
-          <Route path="/route-confirmation" element={<RouteConfirmation />} />
-          <Route path="/live-tracking" element={<LiveTracking />} />
-          <Route path="/my-trips" element={<MyTrips />} />
-          <Route path="/my-vehicles" element={<AdminContainer />} />
-          <Route path="/wallet" element={<Wallet />} />
-          <Route path="/ride-history" element={<ReportsAnalytics />} />
-
-          {/* Admin Dashboard Tabbed View */}
-          <Route path="/admin" element={<AdminContainer />} />
-
-          {/* Catch-all fallback */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+      <div className="app-container">
+        <ConditionalNavbar token={token} />
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<Splash />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            
+            {/* Protected Routes */}
+            <Route path="/home" element={token ? <Home /> : <Navigate to="/login" replace />} />
+            <Route path="/route-confirmation" element={token ? <RouteConfirmation /> : <Navigate to="/login" replace />} />
+            <Route path="/available-rides" element={token ? <AvailableRides /> : <Navigate to="/login" replace />} />
+            <Route path="/my-trips" element={token ? <MyTrips /> : <Navigate to="/login" replace />} />
+            <Route path="/live-tracking" element={token ? <LiveTracking /> : <Navigate to="/login" replace />} />
+            <Route path="/wallet" element={token ? <Wallet /> : <Navigate to="/login" replace />} />
+            <Route path="/my-vehicle" element={token ? <MyVehicle /> : <Navigate to="/login" replace />} />
+            <Route path="/admin-dashboard" element={token ? <AdminDashboard /> : <Navigate to="/login" replace />} />
+            <Route path="/payment" element={<PaymentMethod />} />
+            <Route path="/ride-history" element={<RideHistory />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/report" element={<Report />} />
+            
+            {/* Catch-all Fallback */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </main>
       </div>
     </Router>
   );
