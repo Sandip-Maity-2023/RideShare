@@ -3,9 +3,9 @@ const router = express.Router();
 const {
   getSettings,
   updateSettings,
-} = require('../controllers/settingsController');
-const { protect } = require('../middleware/authMiddleware');
-const { adminOnly } = require('../middleware/adminMiddleware');
+} = require('../../controllers/other/settingsController');
+const { protect } = require('../../middleware/authMiddleware');
+const { adminOnly } = require('../../middleware/adminMiddleware');
 
 // Get company configuration (Accessible by all logged-in employees)
 router.get('/', protect, getSettings);

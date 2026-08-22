@@ -1,20 +1,25 @@
 const express = require('express');
+const Vehicle = require('../models/Vehicle');
 const router = express.Router();
-const {
-  getVehicles,
-  addVehicle,
-  toggleVehicleStatus,
-} = require('../controllers/vehicleController');
-const { protect } = require('../middleware/authMiddleware');
-const { adminOnly } = require('../middleware/adminMiddleware');
 
-// Get all vehicles (Admin gets all, Employee gets their own)
-router.get('/', protect, getVehicles);
+router.post('/add', async (req, res) => {
+  try {
+    const { driverId, model, registrationNumber, seatingCapacity } = req.body;
+    const vehicle = new Vehicle({ driver: driverId, model, registrationNumber, seatingCapacity });
+    await vehicle.save();
+    res.json(vehicle);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
-// Register a new vehicle (Accessible to any authenticated employee)
-router.post('/', protect, addVehicle);
-
-// Toggle vehicle status Active/Inactive/Pending (Restricted to CompanyAdmin)
-router.patch('/:id/status', protect, adminOnly, toggleVehicleStatus);
+router.get('/:driverId', async (req, res) => {
+  try {
+    const vehicles = await Vehicle.find({ driver: req.params.driverId });
+    res.json(vehicles);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
 module.exports = router;

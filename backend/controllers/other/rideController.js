@@ -1,5 +1,5 @@
-const Ride = require('../models/Ride');
-const Booking = require('../models/Booking');
+const Ride = require('../../models/Ride');
+const Booking = require('../../models/Booking');
 
 // @desc    Offer/Create a new ride
 // @route   POST /api/rides

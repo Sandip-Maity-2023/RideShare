@@ -3,9 +3,9 @@ const router = express.Router();
 const {
   getEmployees,
   toggleAccess,
-} = require('../controllers/employeeController');
-const { protect } = require('../middleware/authMiddleware');
-const { adminOnly } = require('../middleware/adminMiddleware');
+} = require('../../controllers/employeeController');
+const { protect } = require('../../middleware/authMiddleware');
+const { adminOnly } = require('../../middleware/adminMiddleware');
 
 // Get all registered employees (Restricted to CompanyAdmin)
 router.get('/', protect, adminOnly, getEmployees);

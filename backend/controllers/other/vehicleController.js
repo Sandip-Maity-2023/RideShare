@@ -1,4 +1,4 @@
-const Vehicle = require('../models/Vehicle');
+const Vehicle = require('../../models/Vehicle');
 
 // @desc    Get vehicles (all if Admin, personal if Employee)
 // @route   GET /api/vehicles
